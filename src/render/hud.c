@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loasaad <loasaad@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 18:31:23 by loasaad           #+#    #+#             */
-/*   Updated: 2025/09/03 19:57:13 by loasaad          ###   ########.fr       */
+/*   Created: 2025/09/03 18:48:27 by loasaad           #+#    #+#             */
+/*   Updated: 2025/09/03 20:15:39 by loasaad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int argc, char **argv)
+static void	draw_hud_background(t_game *g)
 {
-	t_game game;
-	game.ended = 0;
-	if (argc != 2)
+	int	i;
+
+	i = 0;
+	while (i < 3)
 	{
-		write(2, "Invalid argument\n", 18);
-		return (1);
+		mlx_put_image_to_window(g->mlx, g->win, g->img_wall.ptr, i * TILE, 0);
+		i++;
 	}
-	if (!load_map(&game, argv[1]) || !init_mlx(&game) || !load_textures(&game))
-		return (1);
-	draw_map(&game);
-	show_moves(&game);
-	//print_map(&game); 
-	mlx_hook(game.win, 17, 0, on_close, &game);
-	mlx_hook(game.win, 2, 1L<<0, on_key, &game);
-	mlx_loop(game.mlx);
-	return (0);
+}
+
+void	show_moves(t_game *g)
+{
+	char	*num;
+	char	*msg;
+
+	num = ft_itoa(g->moves);
+	if (!num)
+		return;
+	msg = "Moves: ";
+	draw_hud_background(g);
+	mlx_string_put(g->mlx, g->win, 8, TILE / 2, 0xFFFFFF, msg);
+	mlx_string_put(g->mlx, g->win, 60, TILE / 2, 0xFFFFFF, num);
+	free(num);
 }

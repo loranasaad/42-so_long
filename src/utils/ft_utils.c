@@ -1,0 +1,81 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: loasaad <loasaad@student.42berlin.de>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/03 19:23:43 by loasaad           #+#    #+#             */
+/*   Updated: 2025/09/03 19:53:40 by loasaad          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long.h"
+#include "get_next_line.h"
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t			i;
+	unsigned char	*ptr;
+
+	i = 0;
+	ptr = (unsigned char *)s;
+	while (i < n)
+	{
+		ptr[i] = 0;
+		i++;
+	}
+}
+
+static int	ft_number_length(int n)
+{
+	int	digits;
+
+	digits = 0;
+	while (n != 0)
+	{
+		n = n / 10;
+		digits++;
+	}
+	return (digits);
+}
+
+static	char	*ft_build_array(char *result, int n, int len)
+{
+	unsigned int	nb;
+	int				i;
+
+	if (n < 0)
+		nb = -n;
+	else
+		nb = n;
+	i = len - 1;
+	while (nb != 0)
+	{
+		result[i] = '0' + (nb % 10);
+		nb = nb / 10;
+		i--;
+	}
+	if (n < 0)
+		result[0] = '-';
+	return (result);
+}
+
+char	*ft_itoa(int n)
+{
+	int				len;
+	char			*result;
+
+	if (n == 0)
+		return (ft_strdup("0"));
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	len = ft_number_length(n);
+	if (n < 0)
+		len++;
+	result = (char *) malloc (len + 1);
+	if (!result)
+		return (NULL);
+	result[len] = '\0';
+	return (ft_build_array(result, n, len));
+}

@@ -6,7 +6,7 @@
 /*   By: loasaad <loasaad@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:13:02 by loasaad           #+#    #+#             */
-/*   Updated: 2025/09/01 16:28:51 by loasaad          ###   ########.fr       */
+/*   Updated: 2025/09/03 17:31:12 by loasaad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,6 @@ static void clear_nl(char *str)
 		i++;
 	if (str[i] == '\n')
 		str[i] = '\0';
-}
-
-static void	free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		free(map[i++]);
-	free(map);
 }
 
 static int	map_height(const char *file)
@@ -66,6 +56,7 @@ static int	parse_map(t_game *game, const char *file)
 	while((game->map[i] = get_next_line(fd)))
 	{	
 		clear_nl(game->map[i]);
+		init_player_coll(game, game->map[i], i);
 		i++;
 	}
 	game->map[i] = NULL;
@@ -75,6 +66,7 @@ static int	parse_map(t_game *game, const char *file)
 
 int	load_map(t_game *game, const char *file)
 {	
+	ft_bzero(game, sizeof(t_game));
 	game->height = map_height(file);
 	game->map = malloc((game->height + 1) * (sizeof(char *)));
 	if (!game->map)

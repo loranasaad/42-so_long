@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loasaad <loasaad@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 18:31:23 by loasaad           #+#    #+#             */
-/*   Updated: 2025/09/03 19:57:13 by loasaad          ###   ########.fr       */
+/*   Created: 2025/09/03 11:34:08 by loasaad           #+#    #+#             */
+/*   Updated: 2025/09/03 19:44:05 by loasaad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int argc, char **argv)
+void	init_player_coll(t_game *game ,char *str, int i)
 {
-	t_game game;
-	game.ended = 0;
-	if (argc != 2)
+	int	j;
+
+	j = 0;
+	while (str[j])
 	{
-		write(2, "Invalid argument\n", 18);
-		return (1);
+		if (str[j] == 'P')
+		{
+			game->player_x = j;
+			game->player_y = i;
+		}
+		if (str[j] == 'C')
+			(game->collectibles)++;
+		j++;	
 	}
-	if (!load_map(&game, argv[1]) || !init_mlx(&game) || !load_textures(&game))
-		return (1);
-	draw_map(&game);
-	show_moves(&game);
-	//print_map(&game); 
-	mlx_hook(game.win, 17, 0, on_close, &game);
-	mlx_hook(game.win, 2, 1L<<0, on_key, &game);
-	mlx_loop(game.mlx);
-	return (0);
+	return;
+}
+
+void	free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		free(map[i++]);
+	free(map);
 }

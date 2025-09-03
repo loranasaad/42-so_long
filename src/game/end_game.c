@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   end_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loasaad <loasaad@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 18:31:23 by loasaad           #+#    #+#             */
-/*   Updated: 2025/09/03 19:57:13 by loasaad          ###   ########.fr       */
+/*   Created: 2025/09/03 17:22:25 by loasaad           #+#    #+#             */
+/*   Updated: 2025/09/03 17:52:22 by loasaad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int argc, char **argv)
+void	win_game(t_game *g)
 {
-	t_game game;
-	game.ended = 0;
-	if (argc != 2)
-	{
-		write(2, "Invalid argument\n", 18);
-		return (1);
-	}
-	if (!load_map(&game, argv[1]) || !init_mlx(&game) || !load_textures(&game))
-		return (1);
-	draw_map(&game);
-	show_moves(&game);
-	//print_map(&game); 
-	mlx_hook(game.win, 17, 0, on_close, &game);
-	mlx_hook(game.win, 2, 1L<<0, on_key, &game);
-	mlx_loop(game.mlx);
-	return (0);
+	write(1, "You Win!\n", 9);
+	g->ended = 1;
 }

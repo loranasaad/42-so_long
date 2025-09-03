@@ -14,11 +14,16 @@ SRCS := \
   src/debugger.c \
   src/map/map_loader.c \
   src/map/map_check.c \
+  src/map/map_utils.c \
   src/mlxwrap/mlx_init.c \
   src/mlxwrap/hooks.c \
   src/render/render.c \
   src/render/textures.c \
+  src/render/hud.c \
   src/utils/errors.c \
+  src/utils/ft_utils.c \
+  src/game/move.c \
+  src/game/end_game.c \
   gnl/get_next_line.c \
   gnl/get_next_line_utils.c
 
