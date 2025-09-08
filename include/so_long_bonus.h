@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loasaad <loasaad@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 15:34:54 by loasaad           #+#    #+#             */
-/*   Updated: 2025/09/08 15:12:52 by loasaad          ###   ########.fr       */
+/*   Updated: 2025/09/05 11:55:59 by loasaad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,24 @@
 # define KEY_DOWN  125
 # define KEY_UP    126
 
-typedef struct	s_flood
+typedef struct s_anim
 {
-	int		found_c;
-	int		found_e;
-	int		width;
-	int		height;
-	char	**map;
-}				t_flood;
+	int	dir;
+	int	frame;
+	int	tick;
+	int	speed;
+}		t_anim;
 
-typedef struct	s_img
+typedef struct s_pimgs
+{
+	t_img	down[3];
+	t_img	left[3];
+	t_img	right[3];
+	t_img	up[3];
+}			t_pimgs;
+
+
+typedef struct s_img
 {
 	void	*ptr;
 	int		w;
@@ -62,6 +70,8 @@ typedef struct s_game
 	t_img	img_player;
 	t_img	img_exit;
 	t_img	img_coin;
+	t_anim	p_anim;
+	t_pimgs	p_img;
 }			t_game;
 
 int		check_map(t_game *game);
@@ -92,6 +102,6 @@ void	ft_bzero(void *s, size_t n);
 
 void	show_moves(t_game *g);
 
-int		check_path(t_game *g);
+
 
 #endif

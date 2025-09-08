@@ -15,6 +15,7 @@ SRCS := \
   src/map/map_loader.c \
   src/map/map_check.c \
   src/map/map_utils.c \
+  src/map/path_check.c \
   src/mlxwrap/mlx_init.c \
   src/mlxwrap/hooks.c \
   src/render/render.c \

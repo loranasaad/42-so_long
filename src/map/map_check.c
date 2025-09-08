@@ -6,7 +6,7 @@
 /*   By: loasaad <loasaad@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:54:43 by loasaad           #+#    #+#             */
-/*   Updated: 2025/09/01 15:59:11 by loasaad          ###   ########.fr       */
+/*   Updated: 2025/09/08 15:14:33 by loasaad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	check_map(t_game *game)
 	if (!check_count(game->map) || !check_rectangle(game))
 		return (0);
 	if (!check_walls(game, game->height, game->width))
+		return (0);
+	if (!check_path(game))
 		return (0);
 	return (1);
 }
