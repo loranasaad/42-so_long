@@ -1,4 +1,3 @@
-*This project has been created as part of the 42 curriculum by loasaad.*
 
 # So Long — And thanks for all the fish!
 
