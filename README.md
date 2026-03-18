@@ -98,6 +98,7 @@ so_long/
 ├── assets/                 # XPM textures
 ├── gnl/                    # get_next_line
 ├── maps/                   # .ber map files
+├── mlx/                    # MiniLibX library
 └── Makefile
 ```
 
